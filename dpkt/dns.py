@@ -56,6 +56,10 @@ DNS_TXT = 16
 DNS_AAAA = 28
 DNS_SRV = 33
 DNS_OPT = 41
+DNS_DS    = 43
+DNS_RRSIG = 46
+DNS_NSEC3 = 50
+DNS_HTTPS = 65 
 
 # RR classes
 DNS_IN = 1
@@ -319,6 +323,14 @@ class DNS(dpkt.Packet):
                 self.srvname, off = unpack_name(buf, off + 6)
             elif self.type == DNS_OPT:
                 pass  # RFC-6891: OPT is a pseudo-RR not carrying any DNS data
+            elif self.type == DNS_DS:
+                self.type = DNS_DS
+            elif self.type == DNS_RRSIG:
+                self.type = DNS_RRSIG
+            elif self.type == DNS_NSEC3:
+                self.type = DNS_NSEC3
+            elif self.type == DNS_HTTPS:
+                self.type = DNS_HTTPS
             else:
                 raise dpkt.UnpackError('RR type %s is not supported' % self.type)
 
