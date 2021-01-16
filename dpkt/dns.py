@@ -58,6 +58,7 @@ DNS_SRV = 33
 DNS_OPT = 41
 DNS_DS    = 43
 DNS_RRSIG = 46
+DNS_DNSKEY = 48
 DNS_NSEC3 = 50
 DNS_HTTPS = 65 
 
@@ -327,6 +328,8 @@ class DNS(dpkt.Packet):
                 self.type = DNS_DS
             elif self.type == DNS_RRSIG:
                 self.type = DNS_RRSIG
+            elif self.type == DNS_DNSKEY:
+                self.type = DNS_DNSKEY
             elif self.type == DNS_NSEC3:
                 self.type = DNS_NSEC3
             elif self.type == DNS_HTTPS:
